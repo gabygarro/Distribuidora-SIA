@@ -1,3 +1,17 @@
+<?php
+  /* Requerimientos de Software - Prof. Alicia Salazar
+   * Distribuidora SIA
+   * Alexis Arguedas, Gabriela Garro, Yanil Gómez
+   * -------------------------------------------------
+   * index.php - Created: 9/06/16
+   * Homepage del proyecto, desde donde se puede iniciar sesión
+   */
+
+  // Start the session so that it can be destroyed. Added in case a user leaves the website without first logging out.
+  session_start();
+  session_destroy();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,7 +61,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
+                <a class="navbar-brand" href="#page-top">Distribuidora SIA</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -57,7 +71,7 @@
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#portfolio">Iniciar sesión</a>
+                        <a href="#" data-toggle="modal" data-target="#iniciarSesion">Iniciar sesión</a>
                     </li>
                 </ul>
             </div>
@@ -71,11 +85,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <img class="img-responsive" src="favicon.png" alt="">
+                    <img class="img-responsive" src="img/profile.png" alt="">
                     <div class="intro-text">
-                        <span class="name">Start Bootstrap</span>
+                        <span class="name">Distribuidora SIA</span>
                         <hr class="star-light">
-                        <span class="skills">Web Developer - Graphic Artist - User Experience Designer</span>
+                        <span class="skills">Sistema de administración y logística</span>
                     </div>
                 </div>
             </div>
@@ -87,7 +101,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Portfolio</h2>
+                    <h2>Documentación</h2>
                     <hr class="star-primary">
                 </div>
             </div>
@@ -157,6 +171,7 @@
     </section>
 
     <!-- About Section -->
+    <!--
     <section class="success" id="about">
         <div class="container">
             <div class="row">
@@ -180,8 +195,10 @@
             </div>
         </div>
     </section>
+    -->
 
     <!-- Contact Section -->
+    <!--
     <section id="contact">
         <div class="container">
             <div class="row">
@@ -192,8 +209,10 @@
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
+                -->
                     <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                     <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+                    <!--
                     <form name="sentMessage" id="contactForm" novalidate>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
@@ -235,6 +254,7 @@
             </div>
         </div>
     </section>
+    -->
 
     <!-- Footer -->
     <footer class="text-center">
@@ -242,12 +262,16 @@
             <div class="container">
                 <div class="row">
                     <div class="footer-col col-md-4">
-                        <h3>Location</h3>
-                        <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
+                        <h3>Locación</h3>
+                        <p>Instituto Tecnológico de Costa Rica, Cartago</p>
                     </div>
                     <div class="footer-col col-md-4">
-                        <h3>Around the Web</h3>
+                        <h3>Redes sociales</h3>
                         <ul class="list-inline">
+                            <li>
+                                <a href="https://github.com/gabygarro/MatchMe" class="btn-social btn-outline"><i class="fa fa-fw fa-github"></i></a>
+                            </li>
+                            <!--
                             <li>
                                 <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
                             </li>
@@ -263,11 +287,14 @@
                             <li>
                                 <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
                             </li>
+                            -->
                         </ul>
                     </div>
                     <div class="footer-col col-md-4">
-                        <h3>About Freelancer</h3>
-                        <p>Freelance is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
+                        <h3>Acerca del proyecto</h3>
+                        <p><b>Curso:</b> Requerimientos de Software, I Semestre 2016</p>
+                        <p><b>Profesora:</b> Alicia Salazar</p>
+                        <p><b>Alumnos:</b> Alexis Arguegas, Gabriela Garro, Yanil Gómez</p>
                     </div>
                 </div>
             </div>
@@ -276,7 +303,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        Copyright &copy; Your Website 2014
+                        Copyright &copy; Petuñi Developers 2016
                     </div>
                 </div>
             </div>
@@ -288,6 +315,63 @@
         <a class="btn btn-primary" href="#page-top">
             <i class="fa fa-chevron-up"></i>
         </a>
+    </div>
+
+    <!--Iniciar sesión modal-->
+    <div class="portfolio-modal modal fade" id="iniciarSesion" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Iniciar sesión</h2>
+                            <hr class="star-primary">
+                            <form role="form" action="login.php" method="POST" class="registration-form">
+                                <div class="form-group">
+                                    <span>
+	                                    <?php //in case there's an error redirected from login.php
+	                                    	if (isset($_SESSION['loginerror'])) echo $_SESSION['loginerror']  . "<br>";
+	                                    ?>
+                                    </span>
+                                </div>
+                                <div class="row control-group">
+		                            <div class="form-group col-xs-12 floating-label-form-group controls">
+		                                <label>Usuario</label>
+		                                <input type="text" class="form-control" placeholder="Usuario" name="usuario" id="usuario" required data-validation-required-message="Por favor ingrese su usuario.">
+		                                <p class="help-block text-danger"></p>
+		                            </div>
+		                        </div>
+                                <div class="row control-group">
+		                            <div class="form-group col-xs-12 floating-label-form-group controls">
+		                                <label>Password</label>
+		                                <input type="password" class="form-control" placeholder="Contraseña" name="contrasena" id="contrasena" required data-validation-required-message="Por favor ingrese su contraseña.">
+		                                <p class="help-block text-danger"></p>
+		                            </div>
+		                        </div>
+                                <div class="modal-footer">
+                                    <div class = "container">
+                                        <div class ="row">
+                                        	<div class = "col-md-2">
+                                            	<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
+                                        	</div>
+                                        	<div class = "col-md-3">
+                                            	<input name = "submit" type = "submit" class="btn btn-default" value = "Iniciar sesión">
+                                        	</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Portfolio Modals -->
