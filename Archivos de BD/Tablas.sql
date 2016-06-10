@@ -360,6 +360,13 @@ CREATE INDEX `fk_Inventario_has_Pedido_Pedido1_idx` ON `general`.`ArticulosXPedi
 
 CREATE INDEX `fk_Inventario_has_Pedido_Inventario1_idx` ON `general`.`ArticulosXPedido` (`Inventario_Bodega_idBodega` ASC, `Inventario_Producto_idProducto` ASC);
 
+CREATE USER 'normalUser' IDENTIFIED BY 'reque123';
+
+GRANT ALL ON `general`.* TO 'normalUser';
+GRANT SELECT, INSERT, TRIGGER ON TABLE `general`.* TO 'normalUser';
+GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE `general`.* TO 'normalUser';
+GRANT EXECUTE ON ROUTINE `general`.* TO 'normalUser';
+GRANT SELECT ON TABLE `general`.* TO 'normalUser';
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

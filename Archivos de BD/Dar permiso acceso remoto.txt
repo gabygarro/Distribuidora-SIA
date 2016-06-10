@@ -1,0 +1,1 @@
+GRANT ALL PRIVILEGES on general.* TO arguedaS@ip IDENTIFIED BY 'reque123';
