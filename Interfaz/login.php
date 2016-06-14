@@ -3,7 +3,7 @@
 	* Distribuidora SIA
 	* Alexis Arguedas, Gabriela Garro, Yanil Gómez
 	* -------------------------------------------------
-	* login.php - Created: 10/06/16
+	* login.php - Creado: 10/06/16
 	* Validación de inicio de sesión
 	*/
 	session_start(); //Start session
@@ -35,8 +35,22 @@
 			if ($numrows!=0) {
 				while ($row = mysqli_fetch_assoc($query)){
 				    if ($row['username'] == $user && $row['password'] = $pass) {
+
+				    	//Store the user type
+				    	$_SESSION['userType'] = $row['tipo'];
+
+				    	//Store the userID
+				    	$_SESSION['usernameID'] = $row['idUsuario'];
+
+				    	//Store the user's name
+				    	$_SESSION['username'] = $row['username'];
+
+				    	//User type check
 				    	if ($row['tipo'] == 1) //si es admin
 				    	header("Location: admin/index.php");
+
+				    	/*poner más ifs para cada tipo de usuario*/
+
 				    }
 				}
 			    die("Usuario o contraseña incorrectos.");

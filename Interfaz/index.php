@@ -3,13 +3,12 @@
    * Distribuidora SIA
    * Alexis Arguedas, Gabriela Garro, Yanil Gómez
    * -------------------------------------------------
-   * index.php - Created: 9/06/16
+   * index.php - Creado: 9/06/16
    * Homepage del proyecto, desde donde se puede iniciar sesión
    */
-
-  // Start the session so that it can be destroyed. Added in case a user leaves the website without first logging out.
   session_start();
   session_destroy();
+  session_start();
 ?>
 
 <!DOCTYPE html>
@@ -356,13 +355,15 @@
 		                        </div>
                                 <div class="modal-footer">
                                     <div class = "container">
-                                        <div class ="row">
-                                        	<div class = "col-md-2">
-                                            	<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
-                                        	</div>
-                                        	<div class = "col-md-3">
-                                            	<input name = "submit" type = "submit" class="btn btn-default" value = "Iniciar sesión">
-                                        	</div>
+                                        <div class="buttonHolder">
+                                        	<div class ="row">
+	                                        	<div class = "col-md-2">
+	                                            	<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
+	                                        	</div>
+	                                        	<div class = "col-md-6">
+	                                            	<input name = "submit" type = "submit" class="btn btn-default" value = "Iniciar sesión">
+	                                        	</div>
+	                                        </div>
                                         </div>
                                     </div>
                                 </div>

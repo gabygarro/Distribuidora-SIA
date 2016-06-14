@@ -1,3 +1,21 @@
+<?php
+   /* Requerimientos de Software - Prof. Alicia Salazar
+    * Distribuidora SIA
+    * Alexis Arguedas, Gabriela Garro, Yanil Gómez
+    * -------------------------------------------------
+    * index.php - Creado: 10/06/16
+    * Interfaz de administrador
+    */
+
+   include('session.php');
+    if(!isset($_SESSION['usernameID'])) {
+        header("Location: ../../index.php#notloggedin");
+    }
+    if ($_SESSION['userType'] != 1) { //if it's not admin
+        header("Location: ../../index.php#notadmin");
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +28,7 @@
     <meta name="author" content="">
 
     <title>SIA - Dashboard de Administrador</title>
+    <link rel="icon" href="../../favicon.png" type="image/png">
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -51,11 +70,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+                <a class="navbar-brand" href="index.php">Distribuidora SIA</a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
+                <!--
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -104,9 +124,11 @@
                             </a>
                         </li>
                     </ul>
+                    -->
                     <!-- /.dropdown-messages -->
                 </li>
                 <!-- /.dropdown -->
+                <!-- Dropdown de entregas que están sucediendo en este momento -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -178,7 +200,7 @@
                         <li class="divider"></li>
                         <li>
                             <a class="text-center" href="#">
-                                <strong>See All Tasks</strong>
+                                <strong>Ver todas las entregas</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </li>
@@ -251,12 +273,12 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuración</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="../../index.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="../../index.php"><i class="fa fa-sign-out fa-fw"></i> Cerrar sesión</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -280,7 +302,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
@@ -376,12 +398,13 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
+                    <h1 class="page-header">Admin Dashboard</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
             <div class="row">
+                <!--
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
@@ -404,6 +427,7 @@
                         </a>
                     </div>
                 </div>
+                -->
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-green">
                         <div class="panel-heading">
@@ -413,13 +437,13 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">12</div>
-                                    <div>New Tasks!</div>
+                                    <div>Entregas en este momento</div>
                                 </div>
                             </div>
                         </div>
                         <a href="#">
                             <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
+                                <span class="pull-left">Ver detalles</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
@@ -435,19 +459,20 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">124</div>
-                                    <div>New Orders!</div>
+                                    <div>Órdenes pendientes</div>
                                 </div>
                             </div>
                         </div>
                         <a href="#">
                             <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
+                                <span class="pull-left">Ver detalles</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
                         </a>
                     </div>
                 </div>
+                <!--
                 <div class="col-lg-3 col-md-6">
                     <div class="panel panel-red">
                         <div class="panel-heading">
@@ -471,6 +496,7 @@
                     </div>
                 </div>
             </div>
+            -->
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-8">
@@ -606,11 +632,12 @@
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
+                    <!--
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-clock-o fa-fw"></i> Responsive Timeline
                         </div>
-                        <!-- /.panel-heading -->
+                        /.panel-heading
                         <div class="panel-body">
                             <ul class="timeline">
                                 <li>
@@ -715,82 +742,85 @@
                                 </li>
                             </ul>
                         </div>
+                        -->
                         <!-- /.panel-body -->
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-bell fa-fw"></i> Notifications Panel
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item">
+                                        <i class="fa fa-comment fa-fw"></i> New Comment
+                                        <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                                        </span>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                        <span class="pull-right text-muted small"><em>12 minutes ago</em>
+                                        </span>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                        <span class="pull-right text-muted small"><em>27 minutes ago</em>
+                                        </span>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <i class="fa fa-tasks fa-fw"></i> New Task
+                                        <span class="pull-right text-muted small"><em>43 minutes ago</em>
+                                        </span>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                        <span class="pull-right text-muted small"><em>11:32 AM</em>
+                                        </span>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <i class="fa fa-bolt fa-fw"></i> Server Crashed!
+                                        <span class="pull-right text-muted small"><em>11:13 AM</em>
+                                        </span>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <i class="fa fa-warning fa-fw"></i> Server Not Responding
+                                        <span class="pull-right text-muted small"><em>10:57 AM</em>
+                                        </span>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
+                                        <span class="pull-right text-muted small"><em>9:49 AM</em>
+                                        </span>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <i class="fa fa-money fa-fw"></i> Payment Received
+                                        <span class="pull-right text-muted small"><em>Yesterday</em>
+                                        </span>
+                                    </a>
+                                </div>
+                                <!-- /.list-group -->
+                                <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-bar-chart-o fa-fw"></i> Donut Chart Example
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-donut-chart"></div>
+                                <a href="#" class="btn btn-default btn-block">View Details</a>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
                     </div>
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-8 -->
-                <div class="col-lg-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bell fa-fw"></i> Notifications Panel
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
-                                    <span class="pull-right text-muted small"><em>4 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small"><em>12 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                    <span class="pull-right text-muted small"><em>27 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
-                                    <span class="pull-right text-muted small"><em>43 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small"><em>11:32 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-bolt fa-fw"></i> Server Crashed!
-                                    <span class="pull-right text-muted small"><em>11:13 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-warning fa-fw"></i> Server Not Responding
-                                    <span class="pull-right text-muted small"><em>10:57 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
-                                    <span class="pull-right text-muted small"><em>9:49 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-money fa-fw"></i> Payment Received
-                                    <span class="pull-right text-muted small"><em>Yesterday</em>
-                                    </span>
-                                </a>
-                            </div>
-                            <!-- /.list-group -->
-                            <a href="#" class="btn btn-default btn-block">View All Alerts</a>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
                     <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Donut Chart Example
-                        </div>
-                        <div class="panel-body">
-                            <div id="morris-donut-chart"></div>
-                            <a href="#" class="btn btn-default btn-block">View Details</a>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
+                    <!--
                     <div class="chat-panel panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-comments fa-fw"></i>
@@ -829,7 +859,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <!-- /.panel-heading -->
+                        /.panel-heading
                         <div class="panel-body">
                             <ul class="chat">
                                 <li class="left clearfix">
@@ -895,7 +925,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <!-- /.panel-body -->
+                        /.panel-body
                         <div class="panel-footer">
                             <div class="input-group">
                                 <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
@@ -906,8 +936,7 @@
                                 </span>
                             </div>
                         </div>
-                        <!-- /.panel-footer -->
-                    </div>
+                        -->
                     <!-- /.panel .chat-panel -->
                 </div>
                 <!-- /.col-lg-4 -->
