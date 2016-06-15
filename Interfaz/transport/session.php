@@ -3,8 +3,8 @@
     * Distribuidora SIA
     * Alexis Arguedas, Gabriela Garro, Yanil Gómez
     * -------------------------------------------------
-    * session.php - Creado: 13/06/16
-    * Control de la sesión actual (admin)
+    * session.php - Creado: 14/06/16
+    * Control de la sesión actual (transporte)
     */
 	
 	// Connect to the db
@@ -22,19 +22,6 @@
 			$usernameID = $_SESSION['usernameID'];
 			$username = $_SESSION['username'];
 			$userType = $_SESSION['userType'];
-
-			$queryClientes = mysqli_query($conn, "SELECT idCliente, nombreLocal, Bodega_idBodega as bodega FROM cliente, clienteXRuta, Ruta WHERE idCliente = Cliente_idCliente AND Ruta_idRuta = idRuta;");
-			$clientes = mysqli_num_rows($queryClientes);
-
-			$arrayClientes = array();
-			while($row = mysqli_fetch_assoc($queryClientes)) {
-				$arrayClientes[] = $row;
-			}
-			$_SESSION['arrayClientes'] = $arrayClientes;
-
-    	}
-    	else {
-    		echo "No inició sesión.";
     	}
 	}
 	else {

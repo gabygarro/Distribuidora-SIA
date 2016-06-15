@@ -24,7 +24,7 @@
 		$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname) or die($dberror);
 
 		if ($conn == true) {
-			echo "Connected!";
+			echo "Connected!\n";
 
 			$user = $_POST['usuario'];
 			$pass = $_POST['contrasena'];
@@ -47,7 +47,10 @@
 
 				    	//User type check
 				    	if ($row['tipo'] == 1) //si es admin
-				    	header("Location: admin/index.php");
+				    		header("Location: admin/index.php");
+				    	elseif ($row['tipo'] == 2) {
+				    		header("Location: transport/index.php");
+				    	}
 
 				    	/*poner más ifs para cada tipo de usuario*/
 

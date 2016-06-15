@@ -1,1 +1,1 @@
-GRANT ALL PRIVILEGES on general.* TO arguedaS@ip IDENTIFIED BY 'reque123';
+GRANT ALL PRIVILEGES on general.* TO arguedas@ip IDENTIFIED BY 'reque123';
