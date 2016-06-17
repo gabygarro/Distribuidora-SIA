@@ -21,7 +21,7 @@
         $bodega = $_POST["bodega"];
         $idPedido = 0;
 
-        $queryPedido = mysqli_query($conn, "INSERT INTO Pedido (Cliente_IdCliente, entregado) VALUES ('$cliente', 0);");
+        $queryPedido = mysqli_query($conn, "INSERT INTO Pedido (Cliente_IdCliente, entregado, fecha) VALUES ('$cliente', 0, now());");
 
         $queryLastInsert = mysqli_query($conn, "SELECT LAST_INSERT_ID();");
         $numrows = mysqli_num_rows($queryLastInsert);
@@ -375,25 +375,84 @@
                              <!--/.nav-second-level -->
                         </li>
                         <li>
-                            <a href="rutas.php"><i class="fa fa-share-alt fa-fw"></i> Rutas</a>
+                            <a href="#"><i class="fa fa-share-alt fa-fw"></i> Rutas<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Nueva ruta</a>
+                                </li>
+                                <li>
+                                    <a href="rutas.php">Ver rutas</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="bodegas.php"><i class="fa fa-building fa-fw"></i> Bodegas</a>
+                            <a href="#"><i class="fa fa-building fa-fw"></i> Bodegas<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Nueva bodega</a>
+                                </li>
+                                <li>
+                                    <a href="bodegas.php">Ver bodegas</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="clientes.php"><i class="fa fa-users fa-fw"></i> Clientes</a>
+                            <a href="#"><i class="fa fa-users fa-fw"></i> Clientes<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Nuevo cliente</a>
+                                </li>
+                                <li>
+                                    <a href="clientes.php">Ver clientes</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="empleados.php"><i class="fa fa-user fa-fw"></i> Empleados</a>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> Empleados<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Nuevo empleado</a>
+                                </li>
+                                <li>
+                                    <a href="empleados.php">Ver empleados</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="camiones.php"><i class="fa fa-truck fa-fw"></i> Camiones</a>
+                            <a href="#"><i class="fa fa-truck fa-fw"></i> Camiones<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Nuevo camión</a>
+                                </li>
+                                <li>
+                                    <a href="camiones.php">Ver camiones</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="productos.php"><i class="fa fa-suitcase fa-fw"></i> Catálogo de productos</a>
+                            <a href="#"><i class="fa fa-suitcase fa-fw"></i> Productos<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Nuevo producto</a>
+                                </li>
+                                <li>
+                                    <a href="productos.php">Catálogo de productos</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="tablas.php"><i class="fa fa-table fa-fw"></i> Tablas catálogo</a>
+                            <a href="#"><i class="fa fa-table fa-fw"></i> Tablas catálogo<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Nueva marca</a>
+                                </li>
+                                <li>
+                                    <a href="#">Nueva categoría</a>
+                                </li>
+                                <li>
+                                    <a href="tablas.php">Ver tablas catálogo</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>

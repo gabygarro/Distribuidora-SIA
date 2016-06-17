@@ -36,17 +36,23 @@
     <!-- MetisMenu CSS -->
     <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
-    <!-- Timeline CSS -->
-    <link href="../dist/css/timeline.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="../bower_components/datatables-responsive/css/responsive.dataTables.scss" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
 
-    <!-- Morris Charts CSS -->
-    <link href="../bower_components/morrisjs/morris.css" rel="stylesheet">
-
     <!-- Custom Fonts -->
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Datatables JS -->
+    <script src="https://code.jquery.com/jquery-1.12.3.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -54,6 +60,22 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <script>
+        var arrayPedidos = <?php echo json_encode($_SESSION['arrayPedidos']) ?>; 
+
+        $(document).ready(function() {
+            $('#pedidos').DataTable( {
+                data: arrayPedidos,
+                columns: [
+                    { title: "ID. Pedido" },
+                    { title: "ID. Cliente" },
+                    { title: "Cliente" },
+                    { title: "Fecha de Pedido" }
+                ]
+            } );
+        } );
+    </script>
 
 </head>
 
@@ -266,25 +288,84 @@
                              <!--/.nav-second-level -->
                         </li>
                         <li>
-                            <a href="rutas.php"><i class="fa fa-share-alt fa-fw"></i> Rutas</a>
+                            <a href="#"><i class="fa fa-share-alt fa-fw"></i> Rutas<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Nueva ruta</a>
+                                </li>
+                                <li>
+                                    <a href="rutas.php">Ver rutas</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="bodegas.php"><i class="fa fa-building fa-fw"></i> Bodegas</a>
+                            <a href="#"><i class="fa fa-building fa-fw"></i> Bodegas<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Nueva bodega</a>
+                                </li>
+                                <li>
+                                    <a href="bodegas.php">Ver bodegas</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="clientes.php"><i class="fa fa-users fa-fw"></i> Clientes</a>
+                            <a href="#"><i class="fa fa-users fa-fw"></i> Clientes<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Nuevo cliente</a>
+                                </li>
+                                <li>
+                                    <a href="clientes.php">Ver clientes</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="empleados.php"><i class="fa fa-user fa-fw"></i> Empleados</a>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> Empleados<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Nuevo empleado</a>
+                                </li>
+                                <li>
+                                    <a href="empleados.php">Ver empleados</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="camiones.php"><i class="fa fa-truck fa-fw"></i> Camiones</a>
+                            <a href="#"><i class="fa fa-truck fa-fw"></i> Camiones<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Nuevo camión</a>
+                                </li>
+                                <li>
+                                    <a href="camiones.php">Ver camiones</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="productos.php"><i class="fa fa-suitcase fa-fw"></i> Catálogo de productos</a>
+                            <a href="#"><i class="fa fa-suitcase fa-fw"></i> Productos<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Nuevo producto</a>
+                                </li>
+                                <li>
+                                    <a href="productos.php">Catálogo de productos</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="tablas.php"><i class="fa fa-table fa-fw"></i> Tablas catálogo</a>
+                            <a href="#"><i class="fa fa-table fa-fw"></i> Tablas catálogo<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Nueva marca</a>
+                                </li>
+                                <li>
+                                    <a href="#">Nueva categoría</a>
+                                </li>
+                                <li>
+                                    <a href="tablas.php">Ver tablas catálogo</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -297,9 +378,15 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Tablas catálogo</h1>
+                    <h1 class="page-header">Pedidos</h1>
                 </div>
                 <!-- /.col-lg-12 -->
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <br>
+                        <table id="pedidos" class="display" width="100%"></table>
+                    </div>
+                </div>
             </div>
             <!-- /.row -->
 
@@ -318,10 +405,9 @@
     <!-- Metis Menu Plugin JavaScript -->
     <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="../bower_components/raphael/raphael-min.js"></script>
-    <script src="../bower_components/morrisjs/morris.min.js"></script>
-    <script src="../js/morris-data.js"></script>
+    <!-- DataTables JavaScript -->
+    <script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
