@@ -61,31 +61,6 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script>
-        var arrayMarcas = <?php echo json_encode($_SESSION['arrayMarcas'], JSON_PRETTY_PRINT) ?>;
-        var arrayCategorias = <?php echo json_encode($_SESSION['arrayCategorias'], JSON_PRETTY_PRINT) ?>; 
-
-        $(document).ready(function() {
-            $('#marcas').DataTable( {
-                data: arrayMarcas,
-                columns: [
-                    { title: "ID." },
-                    { title: "Nombre" }
-                ]
-            } );
-        } );
-
-        $(document).ready(function() {
-            $('#categorias').DataTable( {
-                data: arrayCategorias,
-                columns: [
-                    { title: "ID." },
-                    { title: "Nombre" }
-                ]
-            } );
-        } );
-    </script>
-
 </head>
 
 <body>
@@ -401,26 +376,42 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Tablas catálogo</h1>
+                    <h1 class="page-header">Nueva ruta</h1>
                 </div>
                 <!-- /.col-lg-12 -->
-                <br>
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Marcas
-                    </div>
                     <div class="panel-body">
-                        <br>
-                        <table id="marcas" class="display" width="100%"></table>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Categorías
-                    </div>
-                    <div class="panel-body">
-                        <br>
-                        <table id="categorias" class="display" width="100%"></table>
+                        <form role="form" name="pedido" action="rutas.php" method="POST">
+                            <label>Nombre</label>
+                            <input id="nombreRuta" name="nombreRuta" type="text" class="form-control"></input>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Provincia</label>
+                                    <select name="provincia" id="provincia" class="form-control"></select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Cantón</label>
+                                    <select name="canton" id="canton" class="form-control"></select>
+                                </div>
+                            </div>
+                            <br> 
+                            <label>Camion</label>
+                            <select id="camion" name ="camion" class="form-control"></select>
+                            <br>
+                            <label>Chofer</label>
+                            <select id="chofer" name ="chofer" class="form-control"></select>
+                            <br>
+                            <label>Días de entrega</label><br> 
+                            <input type="checkbox" name="lunes" value="Lunes"> Lunes 
+                            <input type="checkbox" name="martes" value="Martes"> Martes 
+                            <input type="checkbox" name="miercoles" value="Miércoles"> Miércoles 
+                            <input type="checkbox" name="jueves" value="Jueves"> Jueves 
+                            <input type="checkbox" name="viernes" value="Viernes"> Viernes 
+                            <input type="checkbox" name="sabado" value="Sabado"> Sábado 
+                            <br> <br>
+                            <button name="ruta" class="btn btn-primary" type="submit">Aceptar</button>
+                        </form>
                     </div>
                 </div>
             </div>

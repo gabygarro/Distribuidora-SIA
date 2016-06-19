@@ -92,10 +92,10 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#"><b>Ruta</b></a>
+                    <a href="index.php">Ruta</a>
                 </li>
                 <li>
-                    <a href="incidencia.php">Reporte de incidencia</a>
+                    <a href="#"><b>Reporte de incidencia</b></a>
                 </li>
                 <li>
                     <a href="../index.php">Cerrar sesión</a>
@@ -110,11 +110,10 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i class="fa fa-bars"></i></a>
-                        <h1>Ruta</h1>
-                        <p>Ruta de entregas asignada:</p>
+                        <h1>Reporte de incidencia</h1>
+                        <p>Arrastre el marcador rojo para indicar el lugar de la incidencia: </p>
                     </div>
                 </div>
-                <br>
                 <section id="contact" class="map">
                     <!--
                     <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>
@@ -130,14 +129,18 @@
                     </small>
                     </iframe>
                 </section>
-                <br>
-                <div class="col-lg-12">
-                    <h1 class="page-header">Pedidos</h1>
-                </div>
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <br>
-                        <table id="pedidos" class="display" width="100%"></table>
+                        <form role="form" name="incidencia" action="incidencia.php" method="POST">
+                            <label>Tipo</label>
+                            <select id="tipo" name ="tipo" class="form-control"></select>
+                            <br>
+                            <label>Descripción</label> 
+                            <textarea maxlength="300" class="form-control"></textarea>
+                            <br>
+                            <button name="incidencia" class="btn btn-primary" type="submit">Enviar</button>
+                        </form>
                     </div>
                 </div>
             </div>

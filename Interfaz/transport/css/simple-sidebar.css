@@ -131,3 +131,11 @@
     display: inline;
     width: 50px;
 }
+
+.map {
+    height: 500px;
+}
+
+hr.small {
+    max-width: 100px;
+}

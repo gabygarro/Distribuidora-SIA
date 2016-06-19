@@ -20,6 +20,7 @@
         $cliente = $_POST["cliente"];
         $bodega = $_POST["bodega"];
         $idPedido = 0;
+        $usernameID = $_SESSION['usernameID'];
 
         $queryPedido = mysqli_query($conn, "INSERT INTO Pedido (Cliente_IdCliente, entregado, fecha) VALUES ('$cliente', 0, now());");
 
@@ -29,6 +30,11 @@
             while ($row = mysqli_fetch_assoc($queryLastInsert)) {
                 $idPedido = $row['LAST_INSERT_ID()'];
             }
+
+            //Inserción de evento en bitácora
+            $mensajeBitacora = "Inserción de pedido #" . $idPedido . " de cliente #" . $cliente;
+            $queryBitacora = mysqli_query($conn, "INSERT INTO Bitacora(Usuario_idUsuario, evento, fecha) VALUES ('$usernameID', '$mensajeBitacora', now());");
+
             for ($i = 0; isset($_POST['producto' . $i]); $i++) {
                 $currentProducto = $_POST['producto' . $i];
                 $currentCantidad = $_POST['cantidad' . $i];
@@ -66,17 +72,23 @@
     <!-- MetisMenu CSS -->
     <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
-    <!-- Timeline CSS -->
-    <link href="../dist/css/timeline.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="../bower_components/datatables-responsive/css/responsive.dataTables.scss" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
 
-    <!-- Morris Charts CSS -->
-    <link href="../bower_components/morrisjs/morris.css" rel="stylesheet">
-
     <!-- Custom Fonts -->
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Datatables JS -->
+    <script src="https://code.jquery.com/jquery-1.12.3.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -378,7 +390,7 @@
                             <a href="#"><i class="fa fa-share-alt fa-fw"></i> Rutas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Nueva ruta</a>
+                                    <a href="ruta.php">Nueva ruta</a>
                                 </li>
                                 <li>
                                     <a href="rutas.php">Ver rutas</a>
@@ -441,6 +453,17 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="#"><i class="fa fa-star fa-fw"></i> Proveedores<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="proveedor.php">Orden a proveedor</a>
+                                </li>
+                                <li>
+                                    <a href="proveedores.php">Proveedores</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-table fa-fw"></i> Tablas catálogo<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -453,6 +476,9 @@
                                     <a href="tablas.php">Ver tablas catálogo</a>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="bitacora.php"><i class="fa fa-book fa-fw"></i> Bitácora</a>
                         </li>
                     </ul>
                 </div>
@@ -510,10 +536,9 @@
     <!-- Metis Menu Plugin JavaScript -->
     <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="../bower_components/raphael/raphael-min.js"></script>
-    <script src="../bower_components/morrisjs/morris.min.js"></script>
-    <script src="../js/morris-data.js"></script>
+    <!-- DataTables JavaScript -->
+    <script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>

@@ -40,13 +40,13 @@
 			$_SESSION['arrayClientes2'] = $arrayClientes2;
 
 			// Obtener el catálogo de productos
-			$queryProductos = mysqli_query($conn, "SELECT idProducto, Producto.nombre as ProductoNombre, descripcion, precioCompra, precioVenta, impuesto, pesoPorCaja, Categoria.nombre as CategoriaNombre, Marca.nombre as MarcaNombre FROM Producto, Categoria, Marca WHERE Categoria_idCategoria=idCategoria AND Marca_idMarca = idMarca;");
+			$queryProductos = mysqli_query($conn, "SELECT idProducto, Producto.nombre as ProductoNombre, descripcion, precioCompra, precioVenta, impuesto, pesoPorCaja, Categoria.nombre as CategoriaNombre, Marca.nombre as MarcaNombre, Proveedor.nombre as proveedor FROM Producto, Categoria, Marca, Proveedor WHERE Categoria_idCategoria=idCategoria AND Marca_idMarca = idMarca AND Proveedor_idProveedor = idProveedor;");
 			$productos = mysqli_num_rows($queryProductos);
 			$arrayProductos = array();
 			$arrayProductos2 = array();
 			while ($row = mysqli_fetch_assoc($queryProductos)) {
 				$arrayProductos[$row['idProducto']] = $row;
-				$arrayProductos2[] = [$row['idProducto'], $row['ProductoNombre'], $row['descripcion'], "₡" . $row['precioCompra'], "₡" . $row['precioVenta'], $row['impuesto'] . "%", $row['pesoPorCaja'] . "kg", $row['CategoriaNombre'], $row['MarcaNombre']];
+				$arrayProductos2[] = [$row['idProducto'], $row['ProductoNombre'], $row['descripcion'], "₡" . $row['precioCompra'], "₡" . $row['precioVenta'], $row['impuesto'] . "%", $row['pesoPorCaja'] . "kg", $row['CategoriaNombre'], $row['MarcaNombre'], $row['proveedor']];
 			}
 			$_SESSION['arrayProductos'] = $arrayProductos;
 			$_SESSION['arrayProductos2'] = $arrayProductos2;
@@ -83,12 +83,12 @@
 						$row[$dias[$i]] = "Sí";
 					}
 				}			
-				$arrayRutas[] = [$row['idRuta'], $row['canton'], $row['provincia'], $row['bodega'], $row['camion'], $row['empleado'], $row['lunes'], $row['martes'], $row['miercoles'], $row['jueves'], $row['viernes'], $row['sabado']];
+				$arrayRutas[] = [$row['idRuta'], $row['canton'], $row['provincia'], $row['bodega'], $row['camion'], $row['empleado'], $row['lunes'], $row['martes'], $row['miercoles'], $row['jueves'], $row['viernes'], $row['sabado'], "<a href=\"#editarRutaModal\" data-toggle=\"modal\"><i class=\"fa fa-pencil-square-o\"></i> Editar</a>"];
 			}
 			$_SESSION['arrayRutas'] = $arrayRutas;
 
 			//Obtener los camiones
-			$queryCamiones = mysqli_query($conn, "SELECT idCamion, anho, RTV, marca, modelo, combustible, latitud, longitud FROM CAMION WHERE fueraDeServicio = 0;");
+			$queryCamiones = mysqli_query($conn, "SELECT idCamion, anho, RTV, marca, modelo, combustible, latitud, longitud, pesoMaximo FROM CAMION WHERE fueraDeServicio = 0;");
 			$arrayCamiones = array();
 			while ($row = mysqli_fetch_assoc($queryCamiones)) {
 				if ($row['RTV'] == 0) {
@@ -97,7 +97,7 @@
 				else {
 					$row['RTV'] = "Sí";
 				}
-				$arrayCamiones[] = [$row['idCamion'], $row['anho'], $row['RTV'], $row['marca'], $row['modelo'], $row['combustible'], "<a href=\"http:\/\/maps.google.com\/maps?q=" . $row['latitud'] . "," . $row['longitud'] . "\" target=\"_blank\"><i class=\"fa fa-location-arrow\"></i> Ver</a>"];
+				$arrayCamiones[] = [$row['idCamion'], $row['anho'], $row['RTV'], $row['marca'], $row['modelo'], $row['combustible'], $row['pesoMaximo'] . "kg", "<a href=\"http:\/\/maps.google.com\/maps?q=" . $row['latitud'] . "," . $row['longitud'] . "\" target=\"_blank\"><i class=\"fa fa-location-arrow\"></i> Ver</a>"];
 				//
 			}
 			$_SESSION['arrayCamiones'] = $arrayCamiones;
@@ -136,6 +136,22 @@
 				$arrayCategorias[] = [$row['idCategoria'], $row['nombre']];
 			}
 			$_SESSION['arrayCategorias'] = $arrayCategorias;
+
+			//Obtener proveedores
+			$queryProveedores = mysqli_query($conn, "SELECT * FROM Proveedor");
+			$arrayProveedores = array();
+			while($row = mysqli_fetch_assoc($queryProveedores)) {
+				$arrayProveedores[] = [$row['idProveedor'], $row['nombre'], $row['direccion'], $row['telefono'], $row['tiempoDesalmacenaje'] . "min", "<i class=\"fa fa-share fa-fw\"></i> Ver productos", "<i class=\"fa fa-pencil-square-o\"></i> Editar</a>"];
+			}
+			$_SESSION['arrayProveedores'] = $arrayProveedores;
+
+			//Obtener bitácora
+			$queryBitacora = mysqli_query($conn, "SELECT * FROM Bitacora");
+			$arrayBitacora = array();
+			while($row = mysqli_fetch_assoc($queryBitacora)) {
+				$arrayBitacora[] = [$row['Usuario_idUsuario'], $row['evento'], $row['fecha']];
+			}
+			$_SESSION['arrayBitacora'] = $arrayBitacora;
     	}
     	else {
     		echo "No inició sesión.";

@@ -54,6 +54,7 @@
     <script src="https://code.jquery.com/jquery-1.12.3.js"></script>
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -62,25 +63,19 @@
     <![endif]-->
 
     <script>
-        var arrayMarcas = <?php echo json_encode($_SESSION['arrayMarcas'], JSON_PRETTY_PRINT) ?>;
-        var arrayCategorias = <?php echo json_encode($_SESSION['arrayCategorias'], JSON_PRETTY_PRINT) ?>; 
+        var arrayProveedores = <?php echo json_encode($_SESSION['arrayProveedores'], JSON_PRETTY_PRINT) ?>; 
 
         $(document).ready(function() {
-            $('#marcas').DataTable( {
-                data: arrayMarcas,
+            $('#proveedores').DataTable( {
+                data: arrayProveedores,
                 columns: [
-                    { title: "ID." },
-                    { title: "Nombre" }
-                ]
-            } );
-        } );
-
-        $(document).ready(function() {
-            $('#categorias').DataTable( {
-                data: arrayCategorias,
-                columns: [
-                    { title: "ID." },
-                    { title: "Nombre" }
+                    { title: "ID. Proveedor" },
+                    { title: "Nombre" },
+                    { title: "Descripción" },
+                    { title: "No. teléfono" },
+                    { title: "Tiempo de desalmacenaje"},
+                    { title: "Productos" },
+                    { title: "Editar" }
                 ]
             } );
         } );
@@ -401,26 +396,13 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Tablas catálogo</h1>
+                    <h1 class="page-header">Proveedores</h1>
                 </div>
                 <!-- /.col-lg-12 -->
-                <br>
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Marcas
-                    </div>
                     <div class="panel-body">
                         <br>
-                        <table id="marcas" class="display" width="100%"></table>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Categorías
-                    </div>
-                    <div class="panel-body">
-                        <br>
-                        <table id="categorias" class="display" width="100%"></table>
+                        <table id="proveedores" class="display" width="100%"></table>
                     </div>
                 </div>
             </div>

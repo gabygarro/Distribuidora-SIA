@@ -79,7 +79,8 @@
                     { title: "M" },
                     { title: "J" },
                     { title: "V" },
-                    { title: "S" }
+                    { title: "S" },
+                    { title: "Editar" }
                 ]
             } );
         } );
@@ -299,7 +300,7 @@
                             <a href="#"><i class="fa fa-share-alt fa-fw"></i> Rutas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Nueva ruta</a>
+                                    <a href="ruta.php">Nueva ruta</a>
                                 </li>
                                 <li>
                                     <a href="rutas.php">Ver rutas</a>
@@ -362,6 +363,17 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="#"><i class="fa fa-star fa-fw"></i> Proveedores<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="proveedor.php">Orden a proveedor</a>
+                                </li>
+                                <li>
+                                    <a href="proveedores.php">Proveedores</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-table fa-fw"></i> Tablas catálogo<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -374,6 +386,9 @@
                                     <a href="tablas.php">Ver tablas catálogo</a>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="bitacora.php"><i class="fa fa-book fa-fw"></i> Bitácora</a>
                         </li>
                     </ul>
                 </div>
@@ -403,6 +418,66 @@
 
     </div>
     <!-- /#wrapper -->
+
+    <!-- Modals -->
+    <div class="portfolio-modal modal fade" id="editarRutaModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Editar ruta</h2>
+                            <hr class="star-primary">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <form role="form" name="pedido" action="rutas.php" method="POST">
+                                        <label>Ruta</label>
+                                        <select id="ruta" name ="ruta" class="form-control"></select>
+                                        <br>
+                                        <label>Nombre</label>
+                                        <input id="nombreRuta" name="nombreRuta" type="text" class="form-control"></input>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Provincia</label>
+                                                <select name="provincia" id="provincia" class="form-control"></select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Cantón</label>
+                                                <select name="canton" id="canton" class="form-control"></select>
+                                            </div>
+                                        </div>
+                                        <br> 
+                                        <label>Camion</label>
+                                        <select id="camion" name ="camion" class="form-control"></select>
+                                        <br>
+                                        <label>Chofer</label>
+                                        <select id="chofer" name ="chofer" class="form-control"></select>
+                                        <br>
+                                        <label>Días de entrega</label><br> 
+                                        <input type="checkbox" name="lunes" value="Lunes"> Lunes 
+                                        <input type="checkbox" name="martes" value="Martes"> Martes 
+                                        <input type="checkbox" name="miercoles" value="Miércoles"> Miércoles 
+                                        <input type="checkbox" name="jueves" value="Jueves"> Jueves 
+                                        <input type="checkbox" name="viernes" value="Viernes"> Viernes 
+                                        <input type="checkbox" name="sabado" value="Sabado"> Sábado 
+                                        <br> <br>
+                                        <button name="ruta" class="btn btn-primary" type="submit">Aceptar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>

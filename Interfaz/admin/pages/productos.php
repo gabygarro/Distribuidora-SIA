@@ -77,7 +77,8 @@
                     { title: "Impuesto" },
                     { title: "Peso" },
                     { title: "Categoría" },
-                    { title: "Marca" }
+                    { title: "Marca" },
+                    { title: "Proveedor"}
                 ]
             } );
         } );
@@ -297,7 +298,7 @@
                             <a href="#"><i class="fa fa-share-alt fa-fw"></i> Rutas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Nueva ruta</a>
+                                    <a href="ruta.php">Nueva ruta</a>
                                 </li>
                                 <li>
                                     <a href="rutas.php">Ver rutas</a>
@@ -360,6 +361,17 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="#"><i class="fa fa-star fa-fw"></i> Proveedores<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="proveedor.php">Orden a proveedor</a>
+                                </li>
+                                <li>
+                                    <a href="proveedores.php">Proveedores</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-table fa-fw"></i> Tablas catálogo<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -373,6 +385,9 @@
                                 </li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="bitacora.php"><i class="fa fa-book fa-fw"></i> Bitácora</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -384,7 +399,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Tablas catálogo</h1>
+                    <h1 class="page-header">Productos</h1>
                 </div>
                 <!-- /.col-lg-12 -->
                 <div class="panel panel-default">

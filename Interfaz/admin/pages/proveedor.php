@@ -54,37 +54,13 @@
     <script src="https://code.jquery.com/jquery-1.12.3.js"></script>
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    <script>
-        var arrayMarcas = <?php echo json_encode($_SESSION['arrayMarcas'], JSON_PRETTY_PRINT) ?>;
-        var arrayCategorias = <?php echo json_encode($_SESSION['arrayCategorias'], JSON_PRETTY_PRINT) ?>; 
-
-        $(document).ready(function() {
-            $('#marcas').DataTable( {
-                data: arrayMarcas,
-                columns: [
-                    { title: "ID." },
-                    { title: "Nombre" }
-                ]
-            } );
-        } );
-
-        $(document).ready(function() {
-            $('#categorias').DataTable( {
-                data: arrayCategorias,
-                columns: [
-                    { title: "ID." },
-                    { title: "Nombre" }
-                ]
-            } );
-        } );
-    </script>
 
 </head>
 
@@ -401,26 +377,31 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Tablas catálogo</h1>
+                    <h1 class="page-header">Proveedores</h1>
                 </div>
                 <!-- /.col-lg-12 -->
-                <br>
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Marcas
-                    </div>
                     <div class="panel-body">
                         <br>
-                        <table id="marcas" class="display" width="100%"></table>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Categorías
-                    </div>
-                    <div class="panel-body">
-                        <br>
-                        <table id="categorias" class="display" width="100%"></table>
+                        <form role="form" name="proveedor" action="proveedor.php" method="POST">
+                            <label>Proveedor</label>
+                            <select id="proveedor" name ="proveedor" class="form-control"></select>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label>Productos</label>
+                                    <select name="producto0" id="producto0" class="form-control"></select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label>Cantidad</label>
+                                    <input type="number" min="1" step="1" name="cantidad0" id="cantidad0" class="form-control">
+                                </div>
+                            </div>
+                            <div id="masproductos"></div>
+                            <br>
+                            <button class="btn btn-default" id="otroProducto" onclick="anadirProducto('masproductos');return false;">Añadir producto</button>
+                            <button name="proveedor" class="btn btn-primary" type="submit">Hacer orden</button>
+                        </form>
                     </div>
                 </div>
             </div>
