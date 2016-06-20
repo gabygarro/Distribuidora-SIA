@@ -1,5 +1,3 @@
--- MySQL Workbench Forward Engineering
-
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
@@ -40,6 +38,39 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `general`.`Categoria`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `general`.`Categoria` (
+  `idCategoria` INT NOT NULL,
+  `nombre` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`idCategoria`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `general`.`Marca`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `general`.`Marca` (
+  `idMarca` INT NOT NULL,
+  `nombre` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`idMarca`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `general`.`Proveedor`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `general`.`Proveedor` (
+  `idProveedor` INT NOT NULL,
+  `nombre` VARCHAR(100) NULL,
+  `direccion` VARCHAR(200) NULL,
+  `telefono` INT NULL,
+  `tiempoDesalmacenaje` INT NULL COMMENT 'En minutos',
+  PRIMARY KEY (`idProveedor`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `general`.`Producto`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `general`.`Producto` (
@@ -48,9 +79,34 @@ CREATE TABLE IF NOT EXISTS `general`.`Producto` (
   `precioCompra` INT NULL,
   `precioVenta` INT NOT NULL,
   `impuesto` INT NOT NULL COMMENT 'En porcentaje.\n13 para 13%\n0 para nada de impuesto',
-  `pesoPorCaja` INT NULL COMMENT 'En kg',
-  PRIMARY KEY (`idProducto`))
+  `pesoPorCaja` DOUBLE NULL COMMENT 'En kg',
+  `Categoria_idCategoria` INT NOT NULL,
+  `Marca_idMarca` INT NOT NULL,
+  `descripcion` VARCHAR(200) NULL,
+  `Proveedor_idProveedor` INT NOT NULL,
+  PRIMARY KEY (`idProducto`),
+  CONSTRAINT `fk_Producto_Categoria1`
+    FOREIGN KEY (`Categoria_idCategoria`)
+    REFERENCES `general`.`Categoria` (`idCategoria`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Producto_Marca1`
+    FOREIGN KEY (`Marca_idMarca`)
+    REFERENCES `general`.`Marca` (`idMarca`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Producto_Proveedor1`
+    FOREIGN KEY (`Proveedor_idProveedor`)
+    REFERENCES `general`.`Proveedor` (`idProveedor`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+CREATE INDEX `fk_Producto_Categoria1_idx` ON `general`.`Producto` (`Categoria_idCategoria` ASC);
+
+CREATE INDEX `fk_Producto_Marca1_idx` ON `general`.`Producto` (`Marca_idMarca` ASC);
+
+CREATE INDEX `fk_Producto_Proveedor1_idx` ON `general`.`Producto` (`Proveedor_idProveedor` ASC);
 
 
 -- -----------------------------------------------------
@@ -79,42 +135,6 @@ CREATE INDEX `fk_Bodega_has_Producto_Bodega_idx` ON `general`.`Inventario` (`Bod
 
 
 -- -----------------------------------------------------
--- Table `general`.`Marca`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `general`.`Marca` (
-  `idMarca` INT NOT NULL,
-  `nombre` VARCHAR(100) NOT NULL,
-  `Producto_idProducto` INT NOT NULL,
-  PRIMARY KEY (`idMarca`),
-  CONSTRAINT `fk_Marca_Producto1`
-    FOREIGN KEY (`Producto_idProducto`)
-    REFERENCES `general`.`Producto` (`idProducto`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-CREATE INDEX `fk_Marca_Producto1_idx` ON `general`.`Marca` (`Producto_idProducto` ASC);
-
-
--- -----------------------------------------------------
--- Table `general`.`Categoria`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `general`.`Categoria` (
-  `idCategoria` INT NOT NULL,
-  `nombre` VARCHAR(100) NULL,
-  `Producto_idProducto` INT NOT NULL,
-  PRIMARY KEY (`idCategoria`),
-  CONSTRAINT `fk_Categoria_Producto1`
-    FOREIGN KEY (`Producto_idProducto`)
-    REFERENCES `general`.`Producto` (`idProducto`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-CREATE INDEX `fk_Categoria_Producto1_idx` ON `general`.`Categoria` (`Producto_idProducto` ASC);
-
-
--- -----------------------------------------------------
 -- Table `general`.`Empleado`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `general`.`Empleado` (
@@ -138,7 +158,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `general`.`EmailsXEmpleado` (
   `email` VARCHAR(45) NOT NULL,
   `Empleado_Usuario_idUsuario` INT NOT NULL,
-  PRIMARY KEY (`email`),
+  PRIMARY KEY (`Empleado_Usuario_idUsuario`),
   CONSTRAINT `fk_EmailsXEmpleado_Empleado1`
     FOREIGN KEY (`Empleado_Usuario_idUsuario`)
     REFERENCES `general`.`Empleado` (`Usuario_idUsuario`)
@@ -155,7 +175,7 @@ CREATE UNIQUE INDEX `email_UNIQUE` ON `general`.`EmailsXEmpleado` (`email` ASC);
 CREATE TABLE IF NOT EXISTS `general`.`TelefonosXEmpleado` (
   `telefono` INT NOT NULL,
   `Empleado_Usuario_idUsuario` INT NOT NULL,
-  PRIMARY KEY (`telefono`),
+  PRIMARY KEY (`Empleado_Usuario_idUsuario`),
   CONSTRAINT `fk_TelefonosXEmpleado_Empleado1`
     FOREIGN KEY (`Empleado_Usuario_idUsuario`)
     REFERENCES `general`.`Empleado` (`Usuario_idUsuario`)
@@ -177,6 +197,9 @@ CREATE TABLE IF NOT EXISTS `general`.`Camion` (
   `modelo` VARCHAR(45) NULL,
   `combustible` VARCHAR(45) NULL,
   `fueraDeServicio` TINYINT(1) NULL,
+  `latitud` DOUBLE NULL,
+  `longitud` DOUBLE NULL,
+  `pesoMaximo` INT NULL,
   PRIMARY KEY (`idCamion`))
 ENGINE = InnoDB;
 
@@ -324,6 +347,7 @@ CREATE TABLE IF NOT EXISTS `general`.`Pedido` (
   `idPedido` INT NOT NULL AUTO_INCREMENT,
   `Cliente_idCliente` INT NOT NULL,
   `entregado` TINYINT(1) NULL,
+  `fecha` DATETIME NULL,
   PRIMARY KEY (`idPedido`),
   CONSTRAINT `fk_Pedido_Cliente1`
     FOREIGN KEY (`Cliente_idCliente`)
@@ -359,6 +383,50 @@ ENGINE = InnoDB;
 CREATE INDEX `fk_Inventario_has_Pedido_Pedido1_idx` ON `general`.`ArticulosXPedido` (`Pedido_idPedido` ASC);
 
 CREATE INDEX `fk_Inventario_has_Pedido_Inventario1_idx` ON `general`.`ArticulosXPedido` (`Inventario_Bodega_idBodega` ASC, `Inventario_Producto_idProducto` ASC);
+
+
+-- -----------------------------------------------------
+-- Table `general`.`Incidencia`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `general`.`Incidencia` (
+  `Empleado_Usuario_idUsuario` INT NOT NULL,
+  `Camion_idCamion` INT NOT NULL,
+  `fecha` DATETIME(6) NOT NULL,
+  `detalles` VARCHAR(300) NULL,
+  `idIncidencia` INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`idIncidencia`),
+  CONSTRAINT `fk_Incidencia_Empleado1`
+    FOREIGN KEY (`Empleado_Usuario_idUsuario`)
+    REFERENCES `general`.`Empleado` (`Usuario_idUsuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Incidencia_Camion1`
+    FOREIGN KEY (`Camion_idCamion`)
+    REFERENCES `general`.`Camion` (`idCamion`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE INDEX `fk_Incidencia_Empleado1_idx` ON `general`.`Incidencia` (`Empleado_Usuario_idUsuario` ASC);
+
+CREATE INDEX `fk_Incidencia_Camion1_idx` ON `general`.`Incidencia` (`Camion_idCamion` ASC);
+
+
+-- -----------------------------------------------------
+-- Table `general`.`Bitacora`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `general`.`Bitacora` (
+  `Usuario_idUsuario` INT NOT NULL,
+  `evento` VARCHAR(45) NULL,
+  `fecha` TIMESTAMP(6) NULL,
+  CONSTRAINT `fk_Bitacora_Usuario1`
+    FOREIGN KEY (`Usuario_idUsuario`)
+    REFERENCES `general`.`Usuario` (`idUsuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE INDEX `fk_Bitacora_Usuario1_idx` ON `general`.`Bitacora` (`Usuario_idUsuario` ASC);
 
 CREATE USER 'normalUser' IDENTIFIED BY 'reque123';
 
